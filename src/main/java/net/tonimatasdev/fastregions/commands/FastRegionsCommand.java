@@ -35,7 +35,7 @@ public class FastRegionsCommand implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         List<String> completions = new ArrayList<>();
 
-        if (args.length == 0) {
+        if (args.length == 1) {
             completions.add("reload");
             completions.add("version");
         }
