@@ -1,0 +1,38 @@
+name: FastRegions
+version: '${version}'
+main: net.tonimatasdev.fastregions.FastRegions
+api-version: '1.20'
+
+commands:
+  region:
+    description: Region manager command.
+
+permissions:
+  fastregion.*:
+    description: All permissions of FastRegions.
+    default: false
+    children:
+      - fastregion.region.pos1
+      - fastregion.region.pos2
+      - fastregion.region.create
+      - fastregion.region.remove
+      - fastregion.region.flag
+      - fastregion.region.list
+
+  fastregion.region.pos1:
+    description: Permission for access to /region pos1
+
+  fastregion.region.pos2:
+    description: Permission for access to /region pos2
+
+  fastregion.region.create:
+    description: Permission for access to /region create
+
+  fastregion.region.remove:
+    description: Permission for access to /region remove
+
+  fastregion.region.flag:
+    description: Permission for access to /region flag
+
+  fastregion.region.list:
+    description: Permission for access to /region list
