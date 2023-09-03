@@ -1,9 +1,13 @@
 package net.tonimatasdev.fastregions.api.region;
 
+import net.tonimatasdev.fastregions.FastRegions;
+import net.tonimatasdev.fastregions.api.FastRegionsAPI;
 import net.tonimatasdev.fastregions.api.flag.Flag;
 import org.bukkit.Location;
 import org.bukkit.World;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 public record Region(String name, World world, Location location1, Location location2, List<Flag> flags) {
@@ -27,7 +31,13 @@ public record Region(String name, World world, Location location1, Location loca
         return flags.contains(flag);
     }
 
-    public void markRegion() {
-        // TODO: Create logic
+    public void save() {
+        String json = FastRegionsAPI.gson.toJson(this);
+
+        try (FileWriter writer = new FileWriter(FastRegions.getInstance().getDataFolder() + "\\regions\\" + name + ".json")) {
+            writer.write(json);
+        } catch (IOException e) {
+            FastRegions.getInstance().getLogger().severe("Error on save region " + name);
+        }
     }
 }

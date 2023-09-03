@@ -1,5 +1,6 @@
 package net.tonimatasdev.fastregions;
 
+import net.tonimatasdev.fastregions.api.FastRegionsAPI;
 import net.tonimatasdev.fastregions.api.region.RegionManager;
 import net.tonimatasdev.fastregions.commands.RegionCommand;
 import org.bukkit.ChatColor;
@@ -15,18 +16,22 @@ public final class FastRegions extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
+        if (FastRegionsAPI.regionsFolder.mkdir()) {
+            getLogger().info("Region folder has been created");
+        }
+
         Objects.requireNonNull(getCommand("region")).setExecutor(new RegionCommand());
 
         RegionManager.load();
 
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "FastRegions has been enabled.");
+        getLogger().info("FastRegions has been enabled.");
     }
 
     @Override
     public void onDisable() {
         RegionManager.save();
 
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "FastRegions has been disabled.");
+        getLogger().info("FastRegions has been enabled.");
     }
 
     public static Plugin getInstance() {
