@@ -4,6 +4,7 @@ import net.tonimatasdev.fastregions.api.FastRegionsAPI;
 import net.tonimatasdev.fastregions.api.region.RegionManager;
 import net.tonimatasdev.fastregions.commands.FastRegionsCommand;
 import net.tonimatasdev.fastregions.commands.RegionCommand;
+import net.tonimatasdev.fastregions.events.BlockEvents;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,6 +24,8 @@ public final class FastRegions extends JavaPlugin {
 
         Objects.requireNonNull(getCommand("region")).setExecutor(new RegionCommand());
         Objects.requireNonNull(getCommand("fastregions")).setExecutor(new FastRegionsCommand());
+
+        getServer().getPluginManager().registerEvents(new BlockEvents(), this);
 
         RegionManager.load();
 

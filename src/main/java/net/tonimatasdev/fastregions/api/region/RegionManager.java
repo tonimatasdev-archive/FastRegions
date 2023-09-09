@@ -12,7 +12,6 @@ public class RegionManager {
     public static Map<String, Region> regions = new HashMap<>();
 
     public static Region getRegion(World world, Location location) {
-        long time = System.currentTimeMillis(); // TODO: Delete this line in the future.
         Region result = null;
 
         for (Region region : regions.values()) {
@@ -23,7 +22,6 @@ public class RegionManager {
             }
         }
 
-        System.out.println("Time to calculate: " + (System.currentTimeMillis() - time)); // TODO: Delete this line in the future.
         return result;
     }
 
@@ -31,9 +29,10 @@ public class RegionManager {
         return regions.get(name) != null;
     }
 
-    public static boolean deleteRegion(String name) {
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void deleteRegion(String name) {
         regions.remove(name);
-        return new File(FastRegionsAPI.regionsFolder + "\\" + name + ".json").delete() || !regions.containsKey(name);
+        new File(FastRegionsAPI.regionsFolder + "\\" + name + ".json").delete();
     }
 
     public static void save() {

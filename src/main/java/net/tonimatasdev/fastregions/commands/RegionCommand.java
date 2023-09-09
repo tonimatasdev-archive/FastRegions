@@ -1,6 +1,7 @@
 package net.tonimatasdev.fastregions.commands;
 
 import net.tonimatasdev.fastregions.api.FastRegionsAPI;
+import net.tonimatasdev.fastregions.api.flag.Flag;
 import net.tonimatasdev.fastregions.api.region.Region;
 import net.tonimatasdev.fastregions.api.region.RegionManager;
 import net.tonimatasdev.fastregions.util.Message;
@@ -12,6 +13,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RegionCommand implements CommandExecutor, TabCompleter {
@@ -62,12 +64,49 @@ public class RegionCommand implements CommandExecutor, TabCompleter {
         if (args[0].equalsIgnoreCase("remove")) {
             if (RegionManager.regions.get(args[1]) == null) Message.sendMessage(sender, false, "The region \"" + args[1] + "\" not exist.");
 
-            boolean bo = RegionManager.deleteRegion(args[1]);
+            RegionManager.deleteRegion(args[1]);
             Message.sendMessage(sender, true, "Region \"" + args[1] + "\" has been removed.");
         }
 
         if (args[0].equalsIgnoreCase("flag")) {
-            // TODO: Subcommand to add or remove flags
+            if (args.length < 2) {
+                Message.sendMessage(sender, false, "Please set the region name.");
+                return false;
+            }
+
+            String regionName = args[1];
+
+            if (!RegionManager.exist(regionName)) {
+                Message.sendMessage(sender, false, "The region \"" + args[1] + "\" not exist.");
+                return false;
+            }
+
+            Region region = RegionManager.regions.get(regionName);
+
+            if (args.length < 3) {
+                Message.sendMessage(sender, false, "Please provide more arguments.");
+                return false;
+            }
+
+            if (args.length < 4) {
+                Message.sendMessage(sender, false, "Please set the flag.");
+                return false;
+            }
+
+            if (args[2].equalsIgnoreCase("add")) {
+                region.addFlag(Flag.valueOf(args[3]));
+                Message.sendMessage(sender, true, "You have added the flag " + args[3] + " in the region " + args[1]);
+
+            }
+
+            if (args[2].equalsIgnoreCase("remove")) {
+                region.deleteFlag(Flag.valueOf(args[3]));
+                Message.sendMessage(sender, true, "You have removed the flag " + args[3] + " in the region " + args[1]);
+            }
+        }
+
+        if (args[0].equalsIgnoreCase("tp")) {
+            // TODO: TP to the region
         }
 
         if (args[0].equalsIgnoreCase("list")) {
@@ -93,12 +132,28 @@ public class RegionCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 2) {
-            if (args[1].equalsIgnoreCase("create")) {
+            if (args[0].equalsIgnoreCase("create")) {
                 completions.add("regionName");
             }
 
-            if (args[1].equalsIgnoreCase("remove") || args[1].equalsIgnoreCase("flag")) {
+            if (args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("flag")) {
                 completions.addAll(RegionManager.regions.keySet());
+            }
+        }
+
+        if (args.length == 3 && args[0].equalsIgnoreCase("flag")) {
+            completions.add("add");
+            completions.add("remove");
+        }
+
+        if (args.length == 4) {
+            if (args[2].equalsIgnoreCase("add")) {
+                completions.addAll(Arrays.stream(Flag.values()).map(Flag::name).toList());
+            }
+
+
+            if (args[2].equalsIgnoreCase("remove")) {
+                completions.addAll(RegionManager.regions.get(args[1]).getFlags().stream().map(Flag::name).toList());
             }
         }
 
