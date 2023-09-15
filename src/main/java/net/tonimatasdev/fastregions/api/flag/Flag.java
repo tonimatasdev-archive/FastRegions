@@ -25,5 +25,6 @@ public enum Flag {
     respawn_anchor_explode,
     bed_explode,
     bell_ring,
-    sensor
+    sensor,
+    raid
 }

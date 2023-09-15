@@ -4,7 +4,7 @@ import net.tonimatasdev.fastregions.api.FastRegionsAPI;
 import net.tonimatasdev.fastregions.api.region.RegionManager;
 import net.tonimatasdev.fastregions.commands.FastRegionsCommand;
 import net.tonimatasdev.fastregions.commands.RegionCommand;
-import net.tonimatasdev.fastregions.events.BlockEvents;
+import net.tonimatasdev.fastregions.events.*;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -26,6 +26,13 @@ public final class FastRegions extends JavaPlugin {
         Objects.requireNonNull(getCommand("fastregions")).setExecutor(new FastRegionsCommand());
 
         getServer().getPluginManager().registerEvents(new BlockEvents(), this);
+        //getServer().getPluginManager().registerEvents(new EnchantmentsEvents(), this);
+        //getServer().getPluginManager().registerEvents(new EntityEvents(), this);
+        //getServer().getPluginManager().registerEvents(new HangingEvents(), this);
+        //getServer().getPluginManager().registerEvents(new InventoryEvents(), this);
+        //getServer().getPluginManager().registerEvents(new PlayerEvents(), this);
+        getServer().getPluginManager().registerEvents(new RaidEvents(), this);
+        //getServer().getPluginManager().registerEvents(new VehicleEvents(), this);
 
         RegionManager.load();
 
