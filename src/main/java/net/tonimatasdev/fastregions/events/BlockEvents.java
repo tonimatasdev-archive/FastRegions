@@ -146,6 +146,6 @@ public class BlockEvents implements Listener {
 
     public boolean isCancelled(BlockEvent event, Flag flag) {
         Region region = RegionManager.getRegion(event.getBlock().getWorld(), event.getBlock().getLocation());
-        return region != null && region.getFlags().contains(flag);
+        return region != null && region.hasFlag(flag);
     }
 }
