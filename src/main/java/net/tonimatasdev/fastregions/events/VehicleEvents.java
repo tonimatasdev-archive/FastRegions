@@ -15,7 +15,7 @@ public class VehicleEvents implements Listener {
 
     @EventHandler
     private void onDamage(VehicleDamageEvent event) {
-        event.setCancelled(isCancelled(event, Flag.vehicle_create));
+        event.setCancelled(isCancelled(event, Flag.vehicle_damage));
     }
 
     @EventHandler
