@@ -26,7 +26,7 @@ public final class FastRegions extends JavaPlugin {
         Objects.requireNonNull(getCommand("fastregions")).setExecutor(new FastRegionsCommand());
 
         getServer().getPluginManager().registerEvents(new BlockEvents(), this);
-        //getServer().getPluginManager().registerEvents(new EnchantmentsEvents(), this);
+        getServer().getPluginManager().registerEvents(new EnchantmentsEvents(), this);
         //getServer().getPluginManager().registerEvents(new EntityEvents(), this);
         //getServer().getPluginManager().registerEvents(new HangingEvents(), this);
         //getServer().getPluginManager().registerEvents(new InventoryEvents(), this);

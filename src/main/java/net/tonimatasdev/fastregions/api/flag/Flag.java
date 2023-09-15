@@ -31,4 +31,5 @@ public enum Flag {
     vehicle_damage,
     vehicle_destroy,
     vehicle_enter,
+    enchant_item
 }
