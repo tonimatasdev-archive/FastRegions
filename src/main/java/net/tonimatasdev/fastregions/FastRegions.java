@@ -32,7 +32,7 @@ public final class FastRegions extends JavaPlugin {
         //getServer().getPluginManager().registerEvents(new InventoryEvents(), this);
         //getServer().getPluginManager().registerEvents(new PlayerEvents(), this);
         getServer().getPluginManager().registerEvents(new RaidEvents(), this);
-        //getServer().getPluginManager().registerEvents(new VehicleEvents(), this);
+        getServer().getPluginManager().registerEvents(new VehicleEvents(), this);
 
         RegionManager.load();
 

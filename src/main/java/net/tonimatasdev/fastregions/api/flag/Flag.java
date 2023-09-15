@@ -26,5 +26,9 @@ public enum Flag {
     bed_explode,
     bell_ring,
     sensor,
-    raid
+    raid,
+    vehicle_create,
+    vehicle_damage,
+    vehicle_destroy,
+    vehicle_enter,
 }
