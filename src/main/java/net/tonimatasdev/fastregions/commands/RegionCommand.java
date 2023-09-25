@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public class RegionCommand implements CommandExecutor, TabCompleter {
     @Override
@@ -137,7 +138,13 @@ public class RegionCommand implements CommandExecutor, TabCompleter {
             }
 
             if (args[0].equalsIgnoreCase("remove") || args[0].equalsIgnoreCase("flag")) {
-                completions.addAll(RegionManager.regions.keySet());
+                Set<String> regions = RegionManager.regions.keySet();
+
+                if (regions.isEmpty()) {
+                    Message.sendMessage(sender, false, "You don't have regions.");
+                } else {
+                    completions.addAll(regions);
+                }
             }
         }
 
@@ -153,7 +160,9 @@ public class RegionCommand implements CommandExecutor, TabCompleter {
 
 
             if (args[2].equalsIgnoreCase("remove")) {
-                completions.addAll(RegionManager.regions.get(args[1]).getFlags().stream().map(Flag::name).toList());
+                Region region = RegionManager.regions.get(args[1]);
+
+                if (region != null) completions.addAll(region.getFlags().stream().map(Flag::name).toList());
             }
         }
 

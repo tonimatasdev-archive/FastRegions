@@ -1,35 +1,32 @@
 package net.tonimatasdev.fastregions.events;
 
 import net.tonimatasdev.fastregions.api.flag.Flag;
-import net.tonimatasdev.fastregions.api.region.Region;
-import net.tonimatasdev.fastregions.api.region.RegionManager;
+import net.tonimatasdev.fastregions.util.EventUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.vehicle.*;
+import org.bukkit.event.vehicle.VehicleCreateEvent;
+import org.bukkit.event.vehicle.VehicleDamageEvent;
+import org.bukkit.event.vehicle.VehicleDestroyEvent;
+import org.bukkit.event.vehicle.VehicleEnterEvent;
 
 public class VehicleEvents implements Listener {
     @EventHandler
     private void onCreate(VehicleCreateEvent event) {
-        event.setCancelled(isCancelled(event, Flag.vehicle_create));
+        event.setCancelled(EventUtils.isVehicleEventCancelled(event, Flag.vehicle_create));
     }
 
     @EventHandler
     private void onDamage(VehicleDamageEvent event) {
-        event.setCancelled(isCancelled(event, Flag.vehicle_damage));
+        event.setCancelled(EventUtils.isVehicleEventCancelled(event, Flag.vehicle_damage));
     }
 
     @EventHandler
     private void onDestroy(VehicleDestroyEvent event) {
-        event.setCancelled(isCancelled(event, Flag.vehicle_destroy));
+        event.setCancelled(EventUtils.isVehicleEventCancelled(event, Flag.vehicle_destroy));
     }
 
     @EventHandler
     private void onEnter(VehicleEnterEvent event) {
-        event.setCancelled(isCancelled(event, Flag.vehicle_enter));
-    }
-
-    public boolean isCancelled(VehicleEvent event, Flag flag) {
-        Region region = RegionManager.getRegion(event.getVehicle().getWorld(), event.getVehicle().getLocation());
-        return region != null && region.hasFlag(flag);
+        event.setCancelled(EventUtils.isVehicleEventCancelled(event, Flag.vehicle_enter));
     }
 }
