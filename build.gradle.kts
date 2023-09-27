@@ -7,7 +7,7 @@ plugins {
 val projectVersion: String by extra
 
 group = "net.tonimatasdev"
-version = projectVersion + "-build." + getVersionMetadata()
+version = projectVersion + "-" + getVersionMetadata()
 
 repositories {
     mavenCentral()
