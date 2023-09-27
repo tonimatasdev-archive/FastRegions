@@ -7,7 +7,7 @@ plugins {
 val projectVersion: String by extra
 
 group = "net.tonimatasdev"
-version = projectVersion
+version = projectVersion + "-build." + getVersionMetadata()
 
 repositories {
     mavenCentral()
@@ -42,4 +42,14 @@ tasks.withType<ProcessResources> {
     filesMatching("plugin.yml") {
         expand("version" to version)
     }
+}
+
+fun getVersionMetadata(): String {
+    val buildId = System.getenv("GITHUB_RUN_NUMBER")
+
+    if (buildId != null) {
+        return "build.$buildId"
+    }
+
+    return "unknown"
 }
