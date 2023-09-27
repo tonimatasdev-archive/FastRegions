@@ -9,7 +9,7 @@ import org.bukkit.event.enchantment.EnchantItemEvent;
 
 public class EnchantmentsEvents implements Listener {
     @EventHandler
-    public void onEnchantItem(EnchantItemEvent event) {
+    private void onEnchantItem(EnchantItemEvent event) {
         Region region = RegionManager.getRegion(event.getEnchanter().getWorld(), event.getEnchanter().getLocation());
         event.setCancelled(region != null && region.hasFlag(Flag.enchant_item));
     }
