@@ -11,6 +11,6 @@ public class RaidEvents implements Listener {
     @EventHandler
     private void onRaidTriggered(RaidTriggerEvent event) {
         Region region = RegionManager.getRegion(event.getWorld(), event.getRaid().getLocation());
-        event.setCancelled(region != null && region.hasFlag(Flag.raid));
+        event.setCancelled(region != null && !region.hasFlag(Flag.raid));
     }
 }

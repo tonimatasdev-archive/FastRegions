@@ -11,6 +11,6 @@ public class WeatherEvents implements Listener {
     @EventHandler
     private void onLightningStrike(LightningStrikeEvent event) {
         Region region = RegionManager.getRegion(event.getWorld(), event.getLightning().getLocation());
-        event.setCancelled(region != null && region.hasFlag(Flag.lightning_strike));
+        event.setCancelled(region != null && !region.hasFlag(Flag.lightning_strike));
     }
 }

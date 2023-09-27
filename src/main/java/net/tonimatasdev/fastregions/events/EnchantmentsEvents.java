@@ -11,6 +11,6 @@ public class EnchantmentsEvents implements Listener {
     @EventHandler
     private void onEnchantItem(EnchantItemEvent event) {
         Region region = RegionManager.getRegion(event.getEnchanter().getWorld(), event.getEnchanter().getLocation());
-        event.setCancelled(region != null && region.hasFlag(Flag.enchant_item));
+        event.setCancelled(region != null && !region.hasFlag(Flag.enchant_item));
     }
 }
