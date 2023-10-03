@@ -1,10 +1,11 @@
 package net.tonimatasdev.fastregions;
 
 import net.tonimatasdev.fastregions.api.FastRegionsAPI;
-import net.tonimatasdev.fastregions.api.region.RegionManager;
+import net.tonimatasdev.fastregions.region.RegionManager;
 import net.tonimatasdev.fastregions.commands.FastRegionsCommand;
 import net.tonimatasdev.fastregions.commands.RegionCommand;
 import net.tonimatasdev.fastregions.events.*;
+import net.tonimatasdev.fastregions.inventory.InventoryManager;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -34,6 +35,8 @@ public final class FastRegions extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new RaidEvents(), this);
         getServer().getPluginManager().registerEvents(new VehicleEvents(), this);
         getServer().getPluginManager().registerEvents(new WeatherEvents(), this);
+
+        getServer().getPluginManager().registerEvents(new InventoryManager(), this);
 
         RegionManager.load();
 

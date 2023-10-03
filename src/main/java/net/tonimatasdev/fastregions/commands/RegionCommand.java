@@ -1,9 +1,12 @@
 package net.tonimatasdev.fastregions.commands;
 
 import net.tonimatasdev.fastregions.api.FastRegionsAPI;
-import net.tonimatasdev.fastregions.api.flag.Flag;
-import net.tonimatasdev.fastregions.api.region.Region;
-import net.tonimatasdev.fastregions.api.region.RegionManager;
+import net.tonimatasdev.fastregions.flag.Flag;
+import net.tonimatasdev.fastregions.inventory.FastInventoryType;
+import net.tonimatasdev.fastregions.inventory.InventoryManager;
+import net.tonimatasdev.fastregions.inventory.type.RegionsInventory;
+import net.tonimatasdev.fastregions.region.Region;
+import net.tonimatasdev.fastregions.region.RegionManager;
 import net.tonimatasdev.fastregions.util.Message;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -114,6 +117,12 @@ public class RegionCommand implements CommandExecutor, TabCompleter {
             // TODO: Send the list of regions
         }
 
+        if (args[0].equalsIgnoreCase("menu")) {
+            if (sender instanceof Player player) {
+                InventoryManager.openInventory(player, RegionsInventory.create(), FastInventoryType.REGIONS);
+            }
+        }
+
         return true;
     }
 
@@ -129,6 +138,7 @@ public class RegionCommand implements CommandExecutor, TabCompleter {
             completions.add("pos1");
             completions.add("pos2");
             completions.add("create");
+            completions.add("menu");
 
         }
 

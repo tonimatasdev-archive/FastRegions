@@ -1,7 +1,7 @@
 package net.tonimatasdev.fastregions.commands;
 
 import net.tonimatasdev.fastregions.FastRegions;
-import net.tonimatasdev.fastregions.api.region.RegionManager;
+import net.tonimatasdev.fastregions.region.RegionManager;
 import net.tonimatasdev.fastregions.util.Message;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
