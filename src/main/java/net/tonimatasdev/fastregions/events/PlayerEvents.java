@@ -1,6 +1,6 @@
 package net.tonimatasdev.fastregions.events;
 
-import net.tonimatasdev.fastregions.api.flag.Flag;
+import net.tonimatasdev.fastregions.flag.Flag;
 import net.tonimatasdev.fastregions.util.EventUtils;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
@@ -58,6 +58,6 @@ public class PlayerEvents implements Listener {
         if (blockData instanceof Gate) flag = Flag.interact_gate;
 
         if (flag == null) return;
-        event.setCancelled(EventUtils.isPlayerEventCancelled(event, flag));
+        if (EventUtils.isPlayerEventCancelled(event, flag)) event.setCancelled(true);
     }
 }

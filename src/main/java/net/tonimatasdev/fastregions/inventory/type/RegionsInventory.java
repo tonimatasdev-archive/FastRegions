@@ -27,8 +27,8 @@ public class RegionsInventory {
             if (itemMeta != null) {
                 itemMeta.setDisplayName(region.getName());
                 List<String> lore = new ArrayList<>();
-                lore.add(Format.format("&6&lPos1 &b" + Format.locationFormat(region.getFirstPosition())));
-                lore.add(Format.format("&6&lPos2 &b" + Format.locationFormat(region.getSecondPosition())));
+                lore.add(Format.format("&6&lPos1 &b" + Format.toFormattedText(region.getFirstPosition())));
+                lore.add(Format.format("&6&lPos2 &b" + Format.toFormattedText(region.getSecondPosition())));
                 lore.add(" ");
                 lore.add(Format.format("&e&lLeft-Click &7&oOpen region options"));
 

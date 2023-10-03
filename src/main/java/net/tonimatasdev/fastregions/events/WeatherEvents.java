@@ -1,8 +1,7 @@
 package net.tonimatasdev.fastregions.events;
 
-import net.tonimatasdev.fastregions.api.flag.Flag;
-import net.tonimatasdev.fastregions.api.region.Region;
-import net.tonimatasdev.fastregions.api.region.RegionManager;
+import net.tonimatasdev.fastregions.flag.Flag;
+import net.tonimatasdev.fastregions.util.EventUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.weather.LightningStrikeEvent;
@@ -10,7 +9,6 @@ import org.bukkit.event.weather.LightningStrikeEvent;
 public class WeatherEvents implements Listener {
     @EventHandler
     private void onLightningStrike(LightningStrikeEvent event) {
-        Region region = RegionManager.getRegion(event.getWorld(), event.getLightning().getLocation());
-        event.setCancelled(region != null && !region.hasFlag(Flag.lightning_strike));
+        if (EventUtils.isRegionNotContainFlag(null, Flag.lightning_strike, event.getWorld(), event.getLightning().getLocation())) event.setCancelled(true);
     }
 }

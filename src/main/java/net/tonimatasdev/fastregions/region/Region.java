@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import net.tonimatasdev.fastregions.FastRegions;
 import net.tonimatasdev.fastregions.api.FastRegionsAPI;
 import net.tonimatasdev.fastregions.flag.Flag;
-import net.tonimatasdev.fastregions.util.Json;
+import net.tonimatasdev.fastregions.util.Format;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -66,8 +66,8 @@ public class Region {
         if (world == null) return;
 
         String name = jsonObject.get("name").getAsString();
-        Location firstPosition = Json.getLocation("firstPosition", world, jsonObject);
-        Location secondPosition = Json.getLocation("secondPosition", world, jsonObject);
+        Location firstPosition = Format.toJson("firstPosition", world, jsonObject);
+        Location secondPosition = Format.toJson("secondPosition", world, jsonObject);
         List<String> flagNames = FastRegionsAPI.gson.fromJson(jsonObject.get("flags"), new TypeToken<List<String>>(){}.getType());
         List<Flag> flags = flagNames.stream().map(Flag::valueOf).toList();
 

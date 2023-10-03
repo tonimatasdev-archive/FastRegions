@@ -1,6 +1,6 @@
 package net.tonimatasdev.fastregions.events;
 
-import net.tonimatasdev.fastregions.api.flag.Flag;
+import net.tonimatasdev.fastregions.flag.Flag;
 import net.tonimatasdev.fastregions.util.EventUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,21 +12,21 @@ import org.bukkit.event.vehicle.VehicleEnterEvent;
 public class VehicleEvents implements Listener {
     @EventHandler
     private void onCreate(VehicleCreateEvent event) {
-        event.setCancelled(EventUtils.isVehicleEventCancelled(event, Flag.vehicle_create));
+        if (EventUtils.isVehicleEventCancelled(event, Flag.vehicle_create)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onDamage(VehicleDamageEvent event) {
-        event.setCancelled(EventUtils.isVehicleEventCancelled(event, Flag.vehicle_damage));
+        if (EventUtils.isVehicleEventCancelled(event, Flag.vehicle_damage)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onDestroy(VehicleDestroyEvent event) {
-        event.setCancelled(EventUtils.isVehicleEventCancelled(event, Flag.vehicle_destroy));
+        if (EventUtils.isVehicleEventCancelled(event, Flag.vehicle_destroy)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onEnter(VehicleEnterEvent event) {
-        event.setCancelled(EventUtils.isVehicleEventCancelled(event, Flag.vehicle_enter));
+        if (EventUtils.isVehicleEventCancelled(event, Flag.vehicle_enter)) event.setCancelled(true);
     }
 }

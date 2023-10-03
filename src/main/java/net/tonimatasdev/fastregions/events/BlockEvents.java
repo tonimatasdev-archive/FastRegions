@@ -1,6 +1,6 @@
 package net.tonimatasdev.fastregions.events;
 
-import net.tonimatasdev.fastregions.api.flag.Flag;
+import net.tonimatasdev.fastregions.flag.Flag;
 import net.tonimatasdev.fastregions.util.EventUtils;
 import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.RespawnAnchor;
@@ -13,138 +13,120 @@ import org.bukkit.event.block.*;
 public class BlockEvents implements Listener {
     @EventHandler
     private void onBreak(BlockBreakEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.block_break));
+        if (EventUtils.isBlockEventCancelled(event, event.getPlayer(), Flag.block_break)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onPlace(BlockPlaceEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.block_place));
+        if (EventUtils.isBlockEventCancelled(event, event.getPlayer(), Flag.block_place)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onMultiPlace(BlockMultiPlaceEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.block_place));
+        if (EventUtils.isBlockEventCancelled(event, event.getPlayer(), Flag.block_place)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onTNTPrime(TNTPrimeEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.tnt_prime));
+        if (EventUtils.isBlockEventCancelled(event, null, Flag.tnt_prime)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onNotePlay(NotePlayEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.note_play));
+        if (EventUtils.isBlockEventCancelled(event, null, Flag.note_play)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onBurn(BlockBurnEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.block_burn));
+        if (EventUtils.isBlockEventCancelled(event, null, Flag.block_burn)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onSpread(BlockSpreadEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.block_spread));
+        if (EventUtils.isBlockEventCancelled(event, null, Flag.block_spread)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onLeavesDecay(LeavesDecayEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.leaves_decay));
+        if (EventUtils.isBlockEventCancelled(event, null, Flag.leaves_decay)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onSpongeAbsorb(SpongeAbsorbEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.sponge_absorb));
+        if (EventUtils.isBlockEventCancelled(event, null, Flag.sponge_absorb)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onGrow(BlockGrowEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.block_grow));
+        if (EventUtils.isBlockEventCancelled(event, null, Flag.block_grow)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onFertilize(BlockFertilizeEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.block_fertilize));
+        if (EventUtils.isBlockEventCancelled(event, event.getPlayer(), Flag.block_fertilize)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onIgnite(BlockIgniteEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.block_ignite));
+        if (EventUtils.isBlockEventCancelled(event, event.getPlayer(), Flag.block_ignite)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onSignChange(SignChangeEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.sign_change));
-    }
-
-    @EventHandler
-    private void onRedstone(BlockRedstoneEvent event) {
-        if (EventUtils.isBlockEventCancelled(event, Flag.redstone)) event.setNewCurrent(0);
+        if (EventUtils.isBlockEventCancelled(event, event.getPlayer(), Flag.sign_change)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onPistonExtend(BlockPistonExtendEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.piston_extend));
+        if (EventUtils.isBlockEventCancelled(event, null, Flag.pistons)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onPistonRetract(BlockPistonRetractEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.piston_retract));
+        if (EventUtils.isBlockEventCancelled(event, null, Flag.pistons)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onCauldronLevelChange(CauldronLevelChangeEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.cauldron_interact));
+        if (EventUtils.isBlockEventCancelled(event, null, Flag.cauldron_interact)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onEntityBlockForm(EntityBlockFormEvent event) {
         if (event.getEntity() instanceof Snowman) {
-            event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.snowman_snow));
+            if (EventUtils.isBlockEventCancelled(event, null, Flag.snowman_snow)) event.setCancelled(true);
         }
 
-        if (event.getEntity() instanceof Player) {
-            event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.frost_walker));
+        if (event.getEntity() instanceof Player player) {
+            if (EventUtils.isBlockEventCancelled(event, player, Flag.frost_walker)) event.setCancelled(true);
         }
     }
 
     @EventHandler
     private void onExplode(BlockExplodeEvent event) {
         if (event.getBlock().getBlockData() instanceof RespawnAnchor) {
-            event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.respawn_anchor_explode));
+            if (EventUtils.isBlockEventCancelled(event, null, Flag.respawn_anchor_explode)) event.setCancelled(true);
         }
 
         if (event.getBlock().getBlockData() instanceof Bed) {
-            event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.bed_explode));
+            if (EventUtils.isBlockEventCancelled(event, null, Flag.bed_explode)) event.setCancelled(true);
         }
     }
 
     @EventHandler
     private void onBellRing(BellRingEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.bell_ring));
+        if (event.getEntity() instanceof Player player) {
+            if (EventUtils.isBlockEventCancelled(event, player, Flag.bell_ring)) event.setCancelled(true);
+        }
     }
 
     @EventHandler
     private void onBellRing(BlockDropItemEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.block_drop));
+        if (EventUtils.isBlockEventCancelled(event, null, Flag.block_drop)) event.setCancelled(true);
     }
 
     @EventHandler
     private void onReceiveGame(BlockReceiveGameEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.sensor));
-    }
-
-    @EventHandler
-    private void onShearEntity(BlockShearEntityEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.block_shears));
-    }
-
-    @EventHandler
-    private void onDispense(BlockDispenseEvent event) {
-        event.setCancelled(EventUtils.isBlockEventCancelled(event, Flag.block_dispense));
-    }
-
-    @EventHandler
-    private void onExp(BlockExpEvent event) {
-        if (EventUtils.isBlockEventCancelled(event, Flag.block_dispense)) event.setExpToDrop(0);
+        if (EventUtils.isBlockEventCancelled(event, null, Flag.sensor)) event.setCancelled(true);
     }
 }
