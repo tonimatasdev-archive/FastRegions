@@ -1,10 +1,10 @@
-package net.tonimatasdev.fastregions.api.region;
+package net.tonimatasdev.fastregions.region;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.JsonObject;
 import net.tonimatasdev.fastregions.FastRegions;
 import net.tonimatasdev.fastregions.api.FastRegionsAPI;
-import net.tonimatasdev.fastregions.api.flag.Flag;
+import net.tonimatasdev.fastregions.flag.Flag;
 import net.tonimatasdev.fastregions.util.Json;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

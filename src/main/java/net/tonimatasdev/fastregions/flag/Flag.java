@@ -1,4 +1,4 @@
-package net.tonimatasdev.fastregions.api.flag;
+package net.tonimatasdev.fastregions.flag;
 
 public enum Flag {
     block_break,

@@ -1,4 +1,4 @@
-package net.tonimatasdev.fastregions.api.region;
+package net.tonimatasdev.fastregions.region;
 
 import net.tonimatasdev.fastregions.api.FastRegionsAPI;
 import org.bukkit.Location;
