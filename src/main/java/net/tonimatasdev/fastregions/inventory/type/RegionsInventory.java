@@ -20,9 +20,9 @@ import java.util.Objects;
 public class RegionsInventory implements FastInventory {
     @Override
     public Inventory getInventory() {
-        Inventory inventory = InventoryUtils.create(6, "Regions");
+        Inventory inventory = InventoryUtils.create(6, name());
 
-        InventoryUtils.addGlassPanes(inventory, 0, 1, 7, 8, 9, 17, 27, 35, 36, 37, 43, 44, 45, 53);
+        InventoryUtils.addGlassPanes(inventory, 0, 1, 3, 4, 5, 7, 8, 9, 17, 27, 35, 36, 37, 39, 40, 41, 43, 44, 45, 53);
 
         for (Region region : RegionManager.regions.values()) {
             ItemStack itemStack = new ItemStack(Material.PAPER);
@@ -73,10 +73,20 @@ public class RegionsInventory implements FastInventory {
                 String regionName = Objects.requireNonNull(itemStack.getItemMeta()).getDisplayName();
                 Region region = RegionManager.regions.get(regionName);
 
-                if (region != null) InventoryUtils.openOtherInventory((Player) event.getView().getPlayer(), new RegionInventory());
+                if (region != null) InventoryUtils.openOtherInventory((Player) event.getView().getPlayer(), new RegionInventory() {
+                    @Override
+                    public String name() {
+                        return regionName;
+                    }
+                });
             }
         }
 
         event.setCancelled(true);
+    }
+
+    @Override
+    public String name() {
+        return "Regions";
     }
 }

@@ -13,9 +13,11 @@ import java.util.Map;
 public class InventoryManager implements Listener {
     public static Map<Inventory, FastInventory> inventories = new HashMap<>();
 
-    public static void openInventory(Player player, FastInventory inventory) {
-        inventories.put(inventory.getInventory(), inventory);
-        player.openInventory(inventory.getInventory());
+    public static void openInventory(Player player, FastInventory fastInventory) {
+        Inventory inventory = fastInventory.getInventory();
+
+        inventories.put(inventory, fastInventory);
+        player.openInventory(inventory);
     }
 
     @EventHandler
@@ -23,13 +25,15 @@ public class InventoryManager implements Listener {
         Inventory result = null;
 
         for (Inventory inventory : inventories.keySet()) {
-            if (inventory.equals(event.getInventory())) {
+            if (inventory.equals(event.getClickedInventory())) {
                 result = inventory;
                 break;
             }
         }
 
         if (result == null) return;
+
+        System.out.println(event.getSlot());
 
         inventories.get(result).onAction(event, result);
     }
