@@ -31,7 +31,7 @@ public class InventoryManager implements Listener {
 
         if (result == null) return;
 
-        inventories.get(result).onAction(event);
+        inventories.get(result).onAction(event, result);
     }
 
     @EventHandler

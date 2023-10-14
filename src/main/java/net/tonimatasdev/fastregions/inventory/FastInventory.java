@@ -6,5 +6,5 @@ import org.bukkit.inventory.Inventory;
 public interface FastInventory {
     Inventory getInventory();
 
-    void onAction(InventoryClickEvent event);
+    void onAction(InventoryClickEvent event, Inventory inventory);
 }
