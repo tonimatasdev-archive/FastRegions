@@ -1,6 +1,5 @@
 package net.tonimatasdev.fastregions.inventory;
 
-import net.tonimatasdev.fastregions.inventory.type.RegionsInventory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,11 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InventoryManager implements Listener {
-    public static Map<Inventory, FastInventoryType> inventories = new HashMap<>();
+    public static Map<Inventory, FastInventory> inventories = new HashMap<>();
 
-    public static void openInventory(Player player, Inventory inventory, FastInventoryType inventoryType) {
-        inventories.put(inventory, inventoryType);
-        player.openInventory(inventory);
+    public static void openInventory(Player player, FastInventory inventory) {
+        inventories.put(inventory.getInventory(), inventory);
+        player.openInventory(inventory.getInventory());
     }
 
     @EventHandler
@@ -32,9 +31,7 @@ public class InventoryManager implements Listener {
 
         if (result == null) return;
 
-        if (inventories.get(result) == FastInventoryType.REGIONS) {
-            RegionsInventory.result(result, event);
-        }
+        inventories.get(result).onAction(event);
     }
 
     @EventHandler

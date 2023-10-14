@@ -2,7 +2,6 @@ package net.tonimatasdev.fastregions.commands;
 
 import net.tonimatasdev.fastregions.api.FastRegionsAPI;
 import net.tonimatasdev.fastregions.flag.Flag;
-import net.tonimatasdev.fastregions.inventory.FastInventoryType;
 import net.tonimatasdev.fastregions.inventory.InventoryManager;
 import net.tonimatasdev.fastregions.inventory.type.RegionsInventory;
 import net.tonimatasdev.fastregions.region.Region;
@@ -119,7 +118,7 @@ public class RegionCommand implements CommandExecutor, TabCompleter {
 
         if (args[0].equalsIgnoreCase("menu")) {
             if (sender instanceof Player player) {
-                InventoryManager.openInventory(player, RegionsInventory.create(), FastInventoryType.REGIONS);
+                InventoryManager.openInventory(player, new RegionsInventory());
             }
         }
 

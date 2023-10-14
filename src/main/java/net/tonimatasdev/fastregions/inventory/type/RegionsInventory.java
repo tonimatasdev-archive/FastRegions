@@ -1,5 +1,6 @@
 package net.tonimatasdev.fastregions.inventory.type;
 
+import net.tonimatasdev.fastregions.inventory.FastInventory;
 import net.tonimatasdev.fastregions.region.Region;
 import net.tonimatasdev.fastregions.region.RegionManager;
 import net.tonimatasdev.fastregions.util.Format;
@@ -14,11 +15,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegionsInventory {
-    public static Inventory create() {
+public class RegionsInventory implements FastInventory {
+    @Override
+    public Inventory getInventory() {
         Inventory inventory = Bukkit.createInventory(null, 54, "Regions");
 
-        InventoryUtils.addGlassPanes(inventory, 0, 1, 7, 8, 9, 17, 27, 35, 36, 37, 43, 44);
+        InventoryUtils.addGlassPanes(inventory, 0, 1, 7, 8, 9, 17, 27, 35, 36, 37, 43, 44, 45, 53);
 
         for (Region region : RegionManager.regions.values()) {
             ItemStack itemStack = new ItemStack(Material.PAPER);
@@ -45,6 +47,7 @@ public class RegionsInventory {
             }
         }
 
+        inventory.setItem(46, new ItemStack(Material.RED_WOOL));
         inventory.setItem(52, new ItemStack(Material.LIME_WOOL));
 
         inventory.setItem(50, new ItemStack(Material.ARROW));
@@ -55,7 +58,8 @@ public class RegionsInventory {
         return inventory;
     }
 
-    public static void result(Inventory inventory, InventoryClickEvent event) {
+    @Override
+    public void onAction(InventoryClickEvent event) {
         event.setCancelled(true);
     }
 }
