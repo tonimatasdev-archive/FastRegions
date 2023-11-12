@@ -1,13 +1,11 @@
-@file:Suppress("UnstableApiUsage")
-
 plugins {
     java
 }
 
-val projectVersion: String by extra
+val spigotVersion: String by extra
 
-group = "net.tonimatasdev"
-version = projectVersion + "-" + getVersionMetadata()
+group = "dev.tonimatas.fastregions"
+version = "$spigotVersion-${getVersionMetadata()}"
 
 repositories {
     mavenCentral()
@@ -16,24 +14,16 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:1.20.1-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:$spigotVersion-R0.1-SNAPSHOT")
 }
 
-val targetJavaVersion = 17
-
 java {
-    val javaVersion = JavaVersion.toVersion(targetJavaVersion)
-    sourceCompatibility = javaVersion
-    targetCompatibility = javaVersion
-    if (JavaVersion.current() < javaVersion) {
-        toolchain.languageVersion.set(JavaLanguageVersion.of(targetJavaVersion))
-    }
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    withSourcesJar()
 }
 
 tasks.withType<JavaCompile> {
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        options.release.set(targetJavaVersion)
-    }
+    options.encoding = "UTF-8"
 }
 
 tasks.withType<ProcessResources> {

@@ -1,7 +1,7 @@
 name: FastRegions
-version: '${version}'
+version: "${version}"
 main: net.tonimatasdev.fastregions.FastRegions
-api-version: '1.20'
+api-version: "1.20"
 
 commands:
   region:
